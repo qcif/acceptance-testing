@@ -123,10 +123,14 @@ sauceLabs {
     browsers {
         // get easy default for each
         firefox_linux_30
+        firefox_linux
         safari_mac_7 {
             capabilities platform: "OS X 10.9"
         }
+        safari_mac
+        chrome_mac
         chrome_windows
+        firefox_windows
     }
     tasks.withType(Test) {
         testClassesDir = test.testClassesDir
