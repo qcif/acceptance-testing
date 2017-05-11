@@ -57,7 +57,7 @@ buildscript {
     }
 }
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 
 repositories {
     maven {
