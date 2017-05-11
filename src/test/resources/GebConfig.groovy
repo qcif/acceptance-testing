@@ -69,10 +69,8 @@ environments {
     if (sauceLabsBrowser) {
         driver = {
             def username = System.getenv("GEB_SAUCE_LABS_USER")
-//            def username = System.getenv('SAUCE_USERNAME')
             assert username
             def accessKey = System.getenv("GEB_SAUCE_LABS_ACCESS_PASSWORD")
-//            def accessKey = System.getenv('SAUCE_ACCESS_KEY')
             assert accessKey
             new SauceLabsDriverFactory().create(sauceLabsBrowser, username, accessKey)
         }
