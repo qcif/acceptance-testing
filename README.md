@@ -4,6 +4,8 @@
 * SAUCE_ACCESS_KEY
 * GEB_BUILD_DOCKER_BASE_URL  (e.g., "http://docker:9000/redbox", where 'docker' is in /etc/hosts entry created by container to connect to host )
 
-[![Sauce Test Status](https://saucelabs.com/buildstatus/mattRedBox)](https://saucelabs.com/u/mattRedBox)
+[![Travis Status] (https://travis-ci.org/mattRedBox/acceptance-testing.svg?branch=master)]
+
+[![Sauce Test Status](https://saucelabs.com/buildstatus/mattRedBox)](https://saucelabs.com/buildstatus/mattRedBox)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/mattRedBox.svg)](https://saucelabs.com/u/mattRedBox)
