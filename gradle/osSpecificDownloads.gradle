@@ -1,6 +1,5 @@
 /*
  *
- *  * The Fascinator - Portal - Security
  *  * Copyright (C) 2017. Queensland Cyber Infrastructure Foundation (http://www.qcif.edu.au/)
  *  *
  *  * This program is free software: you can redistribute it and/or modify
@@ -21,7 +20,7 @@
 
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.apache.commons.io.FileUtils
-//copied from https://github.com/geb/geb-example-gradle
+//adapted from https://github.com/geb/geb-example-gradle
 
 buildscript {
     repositories {
@@ -33,7 +32,6 @@ buildscript {
 }
 
 task downloadChromeDriver {
-    def chromeDriverVersion = '2.24'
     def outputFile = file("$buildDir/webdriver/chromedriver.zip")
     inputs.property("chromeDriverVersion", chromeDriverVersion)
     outputs.file(outputFile)

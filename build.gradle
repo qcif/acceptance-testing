@@ -121,6 +121,7 @@ tasks.withType(Test) {
 
 sauceLabs {
     browsers {
+        // get easy default for each
         firefox_linux_30
         safari_mac_7 {
             capabilities platform: "OS X 10.9"
@@ -137,7 +138,7 @@ sauceLabs {
     }
     connect {
         port = 4445
-        timeout 10
+        timeout 3
 //        additionalOptions = ['--proxy', 'proxy.example.com:8080']
     }
 }

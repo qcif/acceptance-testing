@@ -18,3 +18,7 @@ gradle-app.setting
 *.iml
 *.ipr
 *.iws
+.project
+.idea/
+.settings/
+.classpath
