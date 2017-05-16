@@ -10,8 +10,11 @@ def bindingUpdater
 def currentBrowser
 
 Before() { scenario ->
-    bindingUpdater = new BindingUpdater(binding, new Browser())
+    currentBrowser = new Browser()
+    bindingUpdater = new BindingUpdater(binding, currentBrowser)
     bindingUpdater.initialize()
+    //needed for listeners to pickup session id.
+    println("sessionId:" + currentBrowser.properties.config.rawConfig.sessionId)
 }
 
 After() { scenario ->
