@@ -72,10 +72,7 @@ environments {
             assert username
             def accessKey = System.getenv("GEB_SAUCE_LABS_ACCESS_PASSWORD")
             assert accessKey
-            def driverInstance = new SauceLabsDriverFactory().create(sauceLabsBrowser, username, accessKey)
-            //TODO: replace with cache using thread and session id
-            sessionId = driverInstance.getSessionId().toString()
-            driverInstance
+            new SauceLabsDriverFactory().create(sauceLabsBrowser, username, accessKey)
         }
     }
 }

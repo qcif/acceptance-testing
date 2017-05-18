@@ -1,10 +1,11 @@
 package support
 
-import static cucumber.api.groovy.Hooks.*
-
 import geb.Browser
 import geb.binding.BindingUpdater
+import org.openqa.selenium.remote.RemoteWebDriver
 
+import static cucumber.api.groovy.Hooks.After
+import static cucumber.api.groovy.Hooks.Before
 
 def bindingUpdater
 def currentBrowser
@@ -13,8 +14,10 @@ Before() { scenario ->
     currentBrowser = new Browser()
     bindingUpdater = new BindingUpdater(binding, currentBrowser)
     bindingUpdater.initialize()
-    //needed for listeners to pickup session id.
-    println("sessionId:" + currentBrowser.properties.config.rawConfig.sessionId)
+    if (currentBrowser.driver instanceof RemoteWebDriver) {
+        //needed for test listener(s)
+        println("sessionId:" + ((RemoteWebDriver) currentBrowser.driver).getSessionId())
+    }
 }
 
 After() { scenario ->

@@ -1,0 +1,14 @@
+#This just stands as a placeholder for other projects to pick up and use with their web containers and test scenarios
+version: '2'
+services:
+# webapp:
+ acceptance:
+  build: .
+  image: qcifengineering/acceptance-testing
+#  links:
+#    - webapp
+  environment:
+#    - GEB_BUILD_LOCAL_BASE_URL=http://webapp:<<port>>
+    - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+    - SAUCE_USERNAME=$SAUCE_USERNAME
+    - TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID

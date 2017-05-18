@@ -34,7 +34,6 @@ buildscript {
     ext {
         // The drivers we want to use
         drivers = ["firefox", "chrome", "phantomjs", "remotefirefox", "remotechrome", "saucelabs"]
-
         groovyVersion = '2.4.8'
         gebVersion = '1.1.1'
         seleniumVersion = '2.53.1' //later versions require geckodriver for firefox
@@ -46,7 +45,6 @@ buildscript {
         sauceSeleniumVersion = '1.2'
         cucumberVersion = '1.2.5'
         junitVersion = '4.12'
-
     }
     repositories {
         jcenter()
@@ -122,10 +120,12 @@ tasks.withType(Test) {
 
 sauceLabs {
     browsers {
-        all {
-            capabilities([
-                    "build": '22402'
-            ])
+        if (System.getenv('TRAVIS_BUILD_ID')) {
+            all {
+                capabilities([
+                        "build": System.getenv('TRAVIS_BUILD_ID')
+                ])
+            }
         }
 //        firefox_linux_30
         firefox_linux
@@ -137,19 +137,20 @@ sauceLabs {
 //        chrome_windows
 //        firefox_windows
     }
-    tasks.withType(Test) {
-        testLogging.showStandardStreams = true
-        onOutput { descriptor, TestOutputEvent event ->
-            if (event.message.startsWith("sessionId:")) {
-                logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
-                System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
+    task {
+        tasks.withType(Test) {
+            onOutput { descriptor, TestOutputEvent event ->
+                if (event.message.startsWith("sessionId:")) {
+                    logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
+                    System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
+                }
             }
+            options {
+                addTestListener(new SauceTestListener())
+            }
+            testClassesDir = test.testClassesDir
+            classpath = test.classpath
         }
-        options {
-            addTestListener(new SauceTestListener())
-        }
-        testClassesDir = test.testClassesDir
-        classpath = test.classpath
     }
     account {
         username = System.getenv('SAUCE_USERNAME')
