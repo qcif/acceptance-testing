@@ -15,9 +15,3 @@ notifications:
     on_failure: never
     on_cancel: never
     on_error: never
-env:
-  global:
-  - SAUCE_ACCESS_KEY=56b45f8e-d291-45e0-91b1-d6068eb409c8
-  - SAUCE_USERNAME=qcifdev
-  matrix:
-  - DUMMY="dummy"
