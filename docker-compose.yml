@@ -9,7 +9,6 @@ services:
 #  links:
 #    - webapp
   environment:
-#    - GEB_BUILD_LOCAL_BASE_URL=http://webapp:<<port>>
-    - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-    - SAUCE_USERNAME=$SAUCE_USERNAME
-    - TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID
+  - SAUCE_ACCESS_KEY
+  - SAUCE_USERNAME
+  - TRAVIS_BUILD_ID
