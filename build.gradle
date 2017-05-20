@@ -27,6 +27,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 apply from: "gradle/osSpecificDownloads.gradle"
 apply plugin: "geb-saucelabs"
 
@@ -127,15 +128,15 @@ sauceLabs {
                 ])
             }
         }
-//        firefox_linux_30
+        firefox_linux_30
         firefox_linux
-//        safari_mac_7 {
-//            capabilities platform: "OS X 10.9"
-//        }
-//        safari_mac
-//        chrome_mac
-//        chrome_windows
-//        firefox_windows
+        safari_mac_7 {
+            capabilities platform: "OS X 10.9"
+        }
+        safari_mac
+        chrome_mac
+        chrome_windows
+        firefox_windows
     }
     task {
         tasks.withType(Test) {

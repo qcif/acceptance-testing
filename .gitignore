@@ -22,3 +22,5 @@ gradle-app.setting
 .idea/
 .settings/
 .classpath
+.vagrant/
+gradle/build/

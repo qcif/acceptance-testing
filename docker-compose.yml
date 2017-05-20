@@ -3,6 +3,7 @@ version: '2'
 services:
 # webapp:
  acceptance:
+ ## uncomment the build step when adding new tests to build a new image
   build: .
   image: qcifengineering/acceptance-testing
 #  links:

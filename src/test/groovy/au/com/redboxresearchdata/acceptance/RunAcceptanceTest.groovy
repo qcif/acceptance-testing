@@ -10,7 +10,7 @@ import cucumber.api.CucumberOptions
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        format=["pretty", "html:build/cucumber-reports"],
+        format=["pretty", "html:build/reports/cucumber"],
         features=["src/test/cucumber/features"],
         glue=["src/test/cucumber/steps", "src/test/cucumber/support"]
 )
