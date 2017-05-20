@@ -1,10 +1,11 @@
 sudo: required
 services:
   - docker
-install: true
-script:
+before_install:
   - docker-compose rm -f
+install:
   - docker-compose build
+script:
   - docker-compose run acceptance gradle test
 env:
   global:
@@ -13,7 +14,7 @@ env:
 notifications:
   webhooks:
     urls:
-    - http://dev.redboxresearchdata.com.au/hooks/redboxdocker
+    - http://dev.redboxresearchdata.com.au/hooks/dockerhub?repo=acceptance-testing
     on_success: always
     on_failure: never
     on_cancel: never
