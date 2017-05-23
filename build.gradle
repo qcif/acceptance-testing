@@ -137,14 +137,6 @@ sauceLabs {
         chrome_mac
         chrome_windows
         firefox_windows
-        nexus4 {
-            capabilities(
-                    browserName: "android",
-                    platform: "Linux",
-                    version: "4.4",
-                    deviceName: "LG Nexus 4"
-            )
-        }
     }
     task {
         tasks.withType(Test) {
