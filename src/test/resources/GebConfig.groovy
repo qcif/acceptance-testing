@@ -45,7 +45,7 @@ environments {
         driver = { new FirefoxDriver() }
     }
 
-    phantomJs {
+    phantomjs {
         driver = { new PhantomJSDriver() }
     }
 
