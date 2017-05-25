@@ -1,10 +1,10 @@
 version: '2'
 services:
  acceptance:
-  build: .
+  build: . -e "GEB_BUILD_LOCAL_BASE_URL=${GEB_BUILD_LOCAL_BASE_URL}"
   image: qcifengineering/acceptance-testing
   environment:
-  - GEB_BUILD_LOCAL_BASE_URL
+  - GEB_BUILD_LOCAL_BASE_URL=http://localhost
   - SAUCE_ACCESS_KEY
   - SAUCE_USERNAME
   - TRAVIS_BUILD_NUMBER
