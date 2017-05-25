@@ -1,14 +1,18 @@
 sudo: required
 services:
 - docker
+cache: false
 before_install:
-- docker-compose rm -f
+- docker-compose build
 install:
+- docker-compose run acceptance gradle test
+before_script:
+- cd support/acceptance-testing
 - docker-compose build
 script:
 - docker-compose run acceptance gradle test
 env:
-- GEB_BUILD_LOCAL_BASE_URL=http://localhost
+- GEB_BUILD_LOCAL_BASE_URL=http://localhost:9000/redbox/
 notifications:
   webhooks:
     urls:
