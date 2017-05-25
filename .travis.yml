@@ -5,7 +5,7 @@ cache: false
 before_install:
 - docker-compose build
 install:
-- docker-compose run acceptance gradle test
+- docker-compose run acceptance gradle clean
 before_script:
 - cd support/acceptance-testing
 - docker-compose build
