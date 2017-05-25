@@ -108,6 +108,9 @@ dependencies {
     sauceConnect "com.saucelabs:ci-sauce:1.128"
 }
 
+if (!System.getenv("GEB_BUILD_LOCAL_BASE_URL")) {
+    throw new IllegalStateException("Must define GEB_BUILD_LOCAL_BASE_URL as system property!")
+}
 tasks.withType(Test) {
     systemProperty "geb.build.baseUrl", System.getenv("GEB_BUILD_LOCAL_BASE_URL")
     reports {
@@ -119,6 +122,23 @@ tasks.withType(Test) {
     outputs.upToDateWhen { false }  // Always run tests
 }
 
+//task sauceLabsExtraTask(dependsOn: [allSauceLabsTests]) {
+//    tasks.withType(Test) {
+//        if (System.getProperty("geb.saucelabs.browser")) {
+//            onOutput { descriptor, TestOutputEvent event ->
+//                if (event.message.startsWith("sessionId:")) {
+//                    logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
+//                    System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
+//                }
+//            }
+//            options {
+//                addTestListener(new SauceTestListener())
+//            }
+//            testClassesDir = test.testClassesDir
+//            classpath = test.classpath
+//        }
+//    }
+//}
 sauceLabs {
     browsers {
         if (System.getenv('TRAVIS_BUILD_ID')) {
@@ -126,6 +146,21 @@ sauceLabs {
                 capabilities([
                         "build": System.getenv('TRAVIS_BUILD_ID')
                 ])
+                task {
+                        if (System.getProperty("geb.saucelabs.browser")) {
+                            onOutput { descriptor, TestOutputEvent event ->
+                                if (event.message.startsWith("sessionId:")) {
+                                    logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
+                                    System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
+                                }
+                            }
+                            options {
+                                addTestListener(new SauceTestListener())
+                            }
+                            testClassesDir = test.testClassesDir
+                            classpath = test.classpath
+                        }
+                    }
             }
         }
         firefox_linux_30

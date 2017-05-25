@@ -1,13 +1,8 @@
 package steps
-
-import au.com.redboxresearchdata.page.HomePage
-
-import static cucumber.api.groovy.EN.*
-
-Given(~/^I am on the home page$/) { ->
-    to HomePage
-    at HomePage
-}
+//Given(~/^<given statement goes here>$/) { ->
+//    to ...
+//    at ...
+//}
 //
 //When(~/^<when statement goes here>$/) { ->
 //    page.<method goes here>()
