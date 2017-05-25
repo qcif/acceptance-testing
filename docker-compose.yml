@@ -1,7 +1,7 @@
 version: '2'
 services:
  acceptance:
-  build: . -e "GEB_BUILD_LOCAL_BASE_URL=${GEB_BUILD_LOCAL_BASE_URL}"
+  build: -e "GEB_BUILD_LOCAL_BASE_URL=${GEB_BUILD_LOCAL_BASE_URL}" .
   image: qcifengineering/acceptance-testing
   environment:
   - GEB_BUILD_LOCAL_BASE_URL=http://localhost
