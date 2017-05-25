@@ -125,7 +125,7 @@ tasks.withType(Test) {
 gradle.taskGraph.whenReady { taskGraph ->
     // putting this simply in sauceLabs as a contained task will bleed it into other non-saucelabs tests, so keep it external
     if (taskGraph.hasTask(allSauceLabsTests)) {
-        println("Adding saucelabs listener. Presuming we ARE running saucelab tests...")
+        logger.lifecycle("Adding saucelabs listener. Presuming we ARE running saucelab tests...")
         sauceLabs.task {
             onOutput { descriptor, TestOutputEvent event ->
                 if (event.message.startsWith("sessionId:")) {
@@ -140,7 +140,7 @@ gradle.taskGraph.whenReady { taskGraph ->
             classpath = test.classpath
         }
     } else {
-        println("No saucelabs listener defined. Presuming we are NOT running saucelab tests..")
+        logger.lifecycle("No saucelabs listener defined. Presuming we are NOT running saucelab tests..")
     }
 }
 
