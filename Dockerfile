@@ -15,4 +15,4 @@ gradle unpackSauceConnect && \
 gradle compileTestJava && \
 gradle compileTestGroovy
 VOLUME ${GRADLE_HOME}/.gradle
-CMD ["gradle", "test"]
+CMD ["gradle", "clean"]

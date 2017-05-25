@@ -107,11 +107,10 @@ dependencies {
     // this contains the sauce-connect binary for the tunnel so must always be latest - sauceLabs will reject anything but the latest binary
     sauceConnect "com.saucelabs:ci-sauce:1.128"
 }
-
-if (!System.getenv("GEB_BUILD_LOCAL_BASE_URL")) {
-    throw new IllegalStateException("Must define GEB_BUILD_LOCAL_BASE_URL as system property!")
-}
 tasks.withType(Test) {
+    if (!System.getenv("GEB_BUILD_LOCAL_BASE_URL")) {
+        throw new IllegalStateException("Must define GEB_BUILD_LOCAL_BASE_URL as system property!")
+    }
     systemProperty "geb.build.baseUrl", System.getenv("GEB_BUILD_LOCAL_BASE_URL")
     reports {
         html.destination = reporting.file("test-results/$name")
