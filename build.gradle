@@ -108,9 +108,6 @@ dependencies {
     sauceConnect "com.saucelabs:ci-sauce:1.128"
 }
 tasks.withType(Test) {
-    if (!System.getenv("GEB_BUILD_LOCAL_BASE_URL")) {
-        throw new IllegalStateException("Must define GEB_BUILD_LOCAL_BASE_URL as system property!")
-    }
     systemProperty "geb.build.baseUrl", System.getenv("GEB_BUILD_LOCAL_BASE_URL")
     reports {
         html.destination = reporting.file("test-results/$name")
@@ -141,7 +138,14 @@ gradle.taskGraph.whenReady { taskGraph ->
     } else {
         logger.lifecycle("No saucelabs listener defined. Presuming we are NOT running saucelab tests..")
     }
+    // only check for url if running a test
+    if (taskGraph.hasTask(testClasses)) {
+        if (!System.getenv("GEB_BUILD_LOCAL_BASE_URL")) {
+            throw new IllegalStateException("Must define GEB_BUILD_LOCAL_BASE_URL as system property!")
+        }
+    }
 }
+
 
 sauceLabs {
     browsers {
@@ -192,7 +196,10 @@ drivers.each { driver ->
                 systemProperty "geb.build.baseUrl", System.getenv("GEB_BUILD_DOCKER_BASE_URL") ?: System.getenv("GEB_BUILD_LOCAL_BASE_URL")
                 break
             case 'saucelabs':
+                // we want to see saucelab results for all tests
+                ignoreFailures = true
                 dependsOn 'allSauceLabsTests'
+                enabled = false
                 break
         }
     }
@@ -217,8 +224,5 @@ task allTests(type: Test) {
 }
 
 test {
-    // we want to see saucelab results for all tests
-    ignoreFailures = true
-    dependsOn('allSauceLabsTests')
-    enabled = false
+    dependsOn('saucelabsTest')
 }

@@ -4,7 +4,5 @@ services:
   build: .
   image: qcifengineering/acceptance-testing
   environment:
-  - GEB_BUILD_LOCAL_BASE_URL=http://localtest
   - SAUCE_ACCESS_KEY
   - SAUCE_USERNAME
-  - TRAVIS_BUILD_NUMBER
