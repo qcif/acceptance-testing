@@ -122,59 +122,11 @@ tasks.withType(Test) {
     outputs.upToDateWhen { false }  // Always run tests
 }
 
-//task sauceLabsExtraTask(dependsOn: [allSauceLabsTests]) {
-//    tasks.withType(Test) {
-//        if (System.getProperty("geb.saucelabs.browser")) {
-//            onOutput { descriptor, TestOutputEvent event ->
-//                if (event.message.startsWith("sessionId:")) {
-//                    logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
-//                    System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
-//                }
-//            }
-//            options {
-//                addTestListener(new SauceTestListener())
-//            }
-//            testClassesDir = test.testClassesDir
-//            classpath = test.classpath
-//        }
-//    }
-//}
-sauceLabs {
-    browsers {
-        if (System.getenv('TRAVIS_BUILD_ID')) {
-            all {
-                capabilities([
-                        "build": System.getenv('TRAVIS_BUILD_ID')
-                ])
-                task {
-                        if (System.getProperty("geb.saucelabs.browser")) {
-                            onOutput { descriptor, TestOutputEvent event ->
-                                if (event.message.startsWith("sessionId:")) {
-                                    logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
-                                    System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
-                                }
-                            }
-                            options {
-                                addTestListener(new SauceTestListener())
-                            }
-                            testClassesDir = test.testClassesDir
-                            classpath = test.classpath
-                        }
-                    }
-            }
-        }
-        firefox_linux_30
-        firefox_linux
-        safari_mac_7 {
-            capabilities platform: "OS X 10.9"
-        }
-        safari_mac
-        chrome_mac
-        chrome_windows
-        firefox_windows
-    }
-    task {
-        tasks.withType(Test) {
+gradle.taskGraph.whenReady { taskGraph ->
+    // putting this simply in sauceLabs as a contained task will bleed it into other non-saucelabs tests, so keep it external
+    if (taskGraph.hasTask(allSauceLabsTests)) {
+        println("Adding saucelabs listener. Presuming we ARE running saucelab tests...")
+        sauceLabs.task {
             onOutput { descriptor, TestOutputEvent event ->
                 if (event.message.startsWith("sessionId:")) {
                     logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
@@ -187,6 +139,29 @@ sauceLabs {
             testClassesDir = test.testClassesDir
             classpath = test.classpath
         }
+    } else {
+        println("No saucelabs listener defined. Presuming we are NOT running saucelab tests..")
+    }
+}
+
+sauceLabs {
+    browsers {
+        if (System.getenv('TRAVIS_BUILD_NUMBER')) {
+            all {
+                capabilities([
+                        "build": System.getenv('TRAVIS_BUILD_NUMBER')
+                ])
+            }
+        }
+        firefox_linux_30
+        firefox_linux
+        safari_mac_7 {
+            capabilities platform: "OS X 10.9"
+        }
+        safari_mac
+        chrome_mac
+        chrome_windows
+        firefox_windows
     }
     account {
         username = System.getenv('SAUCE_USERNAME')
@@ -243,6 +218,8 @@ task allTests(type: Test) {
 }
 
 test {
+    // we want to see saucelab results for all tests
+    ignoreFailures = true
     dependsOn('allSauceLabsTests')
     enabled = false
 }
