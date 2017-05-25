@@ -7,6 +7,8 @@ install:
 - docker-compose build
 script:
 - docker-compose run acceptance gradle test
+env:
+- GEB_BUILD_LOCAL_BASE_URL=http://localhost
 notifications:
   webhooks:
     urls:
