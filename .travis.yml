@@ -15,7 +15,7 @@ before_script:
 - cd support/acceptance-testing
 - docker-compose build
 script:
-- docker-compose run -v /tmp/reports:tmp/reports acceptance /bin/bash -c "gradle test; cp -Rf build/reports /tmp/"
+- docker-compose run -v /tmp/reports:/tmp/reports acceptance /bin/bash -c "gradle test; cp -Rf build/reports /tmp/"
 notifications:
   webhooks:
     urls:
