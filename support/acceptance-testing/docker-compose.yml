@@ -1,21 +1,24 @@
-version: '3'
+version: '2'
 services:
   redbox:
     image: qcifengineering/redbox:latest
     ports:
        - "9000:9000"
+  reports:
+    image: qcifengineering/gradle
+    volumes:
+      - /tmp/reports:/home/groovy/acceptance/build/reports
+    command: ['mkdir', '-p', '/home/groovy/acceptance/build/reports']
   acceptance:
     build: .
     image: qcifengineering/acceptance-testing-smoketest
     links:
       - redbox
-    volumes:
-      - data-volume:/home/groovy/acceptance/build/reports
+    volumes_from:
+      - reports
     command: ['gradle', 'test']
     environment:
       - GEB_BUILD_LOCAL_BASE_URL=http://redbox:9000/redbox/
       - SAUCE_ACCESS_KEY
       - SAUCE_USERNAME
       - TRAVIS_BUILD_NUMBER
-volumes:
-  data-volume:
