@@ -10,6 +10,8 @@ services:
     links:
       - redbox
     command: ['gradle', 'test']
+    volumes:
+      - /tmp/reports:/home/groovy/acceptance/build/reports
     environment:
       - GEB_BUILD_LOCAL_BASE_URL=http://redbox:9000/redbox/
       - SAUCE_ACCESS_KEY
