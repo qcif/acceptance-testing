@@ -11,7 +11,7 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 install:
 - docker-compose build
-- docker volume create --driver local --opt users,rw --name reports
+- docker volume create --driver local --opt users --opt rw --name reports
 before_script:
 - cd support/acceptance-testing
 - docker-compose build
