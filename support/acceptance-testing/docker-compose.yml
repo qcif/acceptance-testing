@@ -4,11 +4,17 @@ services:
     image: qcifengineering/redbox:latest
     ports:
        - "9000:9000"
+  reports:
+    image: qcifengineering/gradle
+    volumes:
+      - /tmp/reports:/home/groovy/acceptance/build/reports
   acceptance:
     build: .
     image: qcifengineering/acceptance-testing-smoketest
     links:
       - redbox
+    volumes_from:
+      - reports
     command: ['gradle', 'test']
     environment:
       - GEB_BUILD_LOCAL_BASE_URL=http://redbox:9000/redbox/

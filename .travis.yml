@@ -11,12 +11,11 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 install:
 - docker-compose build
-- docker run -d -v /tmp/reports:/home/groovy/acceptance/build/reports --name acceptance-reports --entrypoint /bin/true qcifengineering/gradle
 before_script:
 - cd support/acceptance-testing
 - docker-compose build
 script:
-- docker-compose run --volumes-from acceptance-reports acceptance gradle test
+- docker-compose run acceptance gradle test
 notifications:
   webhooks:
     urls:

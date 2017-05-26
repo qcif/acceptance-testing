@@ -18,4 +18,4 @@ gradle compileTestGroovy && \
 gradle downloadPhantomjs && \
 gradle unzipPhantomjs
 VOLUME ${GRADLE_HOME}/.gradle
-CMD ["gradle", "tasks"]
+CMD ["gradle"]
