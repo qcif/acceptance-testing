@@ -10,7 +10,7 @@ before_script:
 - cd support/acceptance-testing
 - docker-compose build
 script:
-- docker-compose run acceptance gradle test
+- docker-compose run --volume=/tmp/reports:/home/groovy/acceptance/build/reports acceptance gradle test
 notifications:
   webhooks:
     urls:
@@ -19,3 +19,7 @@ notifications:
     on_failure: never
     on_cancel: never
     on_error: never
+deploy:
+  provider: surge
+  project: /tmp/reports
+  domain: qcifengineering-acceptance-reports.surge.sh

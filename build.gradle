@@ -121,6 +121,10 @@ tasks.withType(Test) {
 gradle.taskGraph.whenReady { taskGraph ->
     // putting this simply in sauceLabs as a contained task will bleed it into other non-saucelabs tests, so keep it external
     if (taskGraph.hasTask(allSauceLabsTests)) {
+        tasks.withType(Test) {
+            // we want to see saucelab results for all tests
+            ignoreFailures = true
+        }
         logger.lifecycle("Adding saucelabs listener. Presuming we ARE running saucelab tests...")
         sauceLabs.task {
             onOutput { descriptor, TestOutputEvent event ->
@@ -196,10 +200,7 @@ drivers.each { driver ->
                 systemProperty "geb.build.baseUrl", System.getenv("GEB_BUILD_DOCKER_BASE_URL") ?: System.getenv("GEB_BUILD_LOCAL_BASE_URL")
                 break
             case 'saucelabs':
-                // we want to see saucelab results for all tests
-                ignoreFailures = true
                 dependsOn 'allSauceLabsTests'
-                enabled = false
                 break
         }
     }
@@ -225,4 +226,6 @@ task allTests(type: Test) {
 
 test {
     dependsOn('saucelabsTest')
+    enabled = false
 }
+saucelabsTest.enabled = false

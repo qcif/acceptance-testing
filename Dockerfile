@@ -13,6 +13,9 @@ USER groovy
 RUN gradle clean && \
 gradle unpackSauceConnect && \
 gradle compileTestJava && \
-gradle compileTestGroovy
+gradle compileTestGroovy && \
+## sanity check against any saucelabs issues - have phantomjs available
+gradle downloadPhantomjs && \
+gradle unzipPhantomjs
 VOLUME ${GRADLE_HOME}/.gradle
 CMD ["gradle", "clean"]

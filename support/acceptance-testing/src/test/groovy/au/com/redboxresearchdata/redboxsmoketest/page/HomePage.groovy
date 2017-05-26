@@ -1,4 +1,4 @@
-package au.com.redboxresearchdata.redboxdistro.page
+package au.com.redboxresearchdata.redboxsmoketest.page
 
 import geb.Page
 
