@@ -11,6 +11,7 @@ before_script:
 script:
 - docker-compose run acceptance gradle test
 before_deploy:
+- docker ps -a
 - docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports/test-results /tmp/
 deploy:
   provider: pages
