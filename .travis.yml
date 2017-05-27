@@ -2,20 +2,23 @@ sudo: required
 services:
 - docker
 cache: false
-env:
-  DOCKER_COMPOSE_VERSION: 1.13.0
-before_install:
-- sudo rm /usr/local/bin/docker-compose
-- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-- chmod +x docker-compose
-- sudo mv docker-compose /usr/local/bin
 install:
 - docker-compose build
 before_script:
 - cd support/acceptance-testing
 - docker-compose build
 script:
-- docker-compose run acceptance /bin/bash -c "gradle test; ./publish_gh_pages_report.sh "
+- docker-compose run acceptance gradle test
+before_deploy:
+- docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports/test-results /tmp/
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: /tmp/test-results
+  repo: qcif/acceptance-testing
+  on:
+    branch: master
 notifications:
   webhooks:
     urls:
