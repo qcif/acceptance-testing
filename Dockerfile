@@ -4,6 +4,7 @@ WORKDIR $PROJECT_HOME
 COPY buildSrc/src ${PROJECT_HOME}/buildSrc/src
 COPY buildSrc/build.gradle ${PROJECT_HOME}/buildSrc/
 COPY src ${PROJECT_HOME}/src
+COPY build.gradle ${PROJECT_HOME}/
 COPY gradle/*.gradle ${PROJECT_HOME}/gradle/
 USER root
 RUN chown -R groovy:groovy /home/groovy
