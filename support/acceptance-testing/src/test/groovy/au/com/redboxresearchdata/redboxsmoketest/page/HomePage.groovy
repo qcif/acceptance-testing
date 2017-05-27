@@ -8,7 +8,7 @@ import geb.Page
  */
 class HomePage extends Page {
     static URL = ""
-    static at = { $("h2#page-heading").text() == "Everything" }
+    static at = { $("h2#page-heading").text() == "Eerything" }
 
     static content = {
         loginLink(required: false) { $("#user-info .login-now") }
