@@ -5,6 +5,7 @@ cache: false
 install:
 - docker-compose build
 - docker-compose run acceptance
+- docker-compose down
 before_script:
 - cd support/acceptance-testing
 - docker-compose build
