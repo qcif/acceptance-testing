@@ -4,11 +4,9 @@ WORKDIR $PROJECT_HOME
 COPY buildSrc/src ${PROJECT_HOME}/buildSrc/src
 COPY buildSrc/build.gradle ${PROJECT_HOME}/buildSrc/
 COPY src ${PROJECT_HOME}/src
-COPY build.gradle publish_gh_pages_report.sh ${PROJECT_HOME}/
 COPY gradle/*.gradle ${PROJECT_HOME}/gradle/
 USER root
-RUN chown -R groovy:groovy /home/groovy && \
-chmod +x ${PROJECT_HOME}/publish_gh_pages_report.sh
+RUN chown -R groovy:groovy /home/groovy
 USER groovy
 #ensure max dependencies present in image, so tests can move quickly
 RUN gradle clean && \
