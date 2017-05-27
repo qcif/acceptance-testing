@@ -12,5 +12,5 @@
 * SAUCE_USERNAME
 * SAUCE_ACCESS_KEY
 * (Optional: for local builds with selenium headless testing) GEB_BUILD_DOCKER_BASE_URL  (e.g., "http://docker:9000/redbox", where 'docker' is in /etc/hosts entry created by container to connect to host )
-* (Optional: reporting - see https://docs.travis-ci.com/user/deployment/surge/)
+* (Optional: reporting - see https://docs.travis-ci.com/user/deployment/pages/)
 
