@@ -1,18 +1,18 @@
 version: '2'
 services:
-  selenium-hub:
+  seleniumhub:
     image: selenium/hub:2.53.1
     ports:
       - "4444:4444"
-  selenium-nodefirefox:
+  seleniumnodefirefox:
     image: selenium/node-firefox:2.53.1
     links:
-      - selenium-hub
+      - seleniumhub
     extra_hosts:
       - "docker:${HOSTIP}"
-  selenium-nodechrome:
+  seleniumnodechrome:
     image: selenium/node-chrome:2.53.1
     links:
-      - selenium-hub
+      - seleniumhub
     extra_hosts:
       - "docker:${HOSTIP}"

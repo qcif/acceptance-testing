@@ -1,7 +1,10 @@
 import geb.driver.SauceLabsDriverFactory
+import org.openqa.selenium.Platform
 import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
+import org.openqa.selenium.remote.BrowserType
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.RemoteWebDriver
 
@@ -31,12 +34,11 @@ import org.openqa.selenium.remote.RemoteWebDriver
 */
 
 waiting {
-    timeout = 10
-    retryInterval = 0.5
+  timeout = 10
+  retryInterval = 1
 }
 
 environments {
-
     // local test drivers
     chrome {
         driver = { new ChromeDriver() }
@@ -50,18 +52,22 @@ environments {
         driver = { new PhantomJSDriver() }
     }
 
-    //docker remote test drivers
-    def remoteWebDriverServerUrl = new URL("http://localhost:4444/wd/hub")
-
     remotefirefox {
         driver = {
+            //docker remote test drivers
+            def remoteWebDriverServerUrl = new URL(System.getenv("DOCKER_HUB_URL"))
             new RemoteWebDriver(remoteWebDriverServerUrl, DesiredCapabilities.firefox())
         }
     }
 
     remotechrome {
         driver = {
-            new RemoteWebDriver(remoteWebDriverServerUrl, DesiredCapabilities.chrome())
+            //docker remote test drivers
+            def remoteWebDriverServerUrl = new URL(System.getenv("DOCKER_HUB_URL"))
+            DesiredCapabilities capabilities = new DesiredCapabilities(BrowserType.CHROME, "", Platform.ANY)
+            capabilities.setCapability(ChromeOptions.CAPABILITY, "--no-sandbox")
+            new RemoteWebDriver(remoteWebDriverServerUrl, capabilities)
+//            remote.manage().timeouts().
         }
     }
 

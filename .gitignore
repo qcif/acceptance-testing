@@ -24,3 +24,4 @@ gradle-app.setting
 .classpath
 .vagrant/
 gradle/build/
+support/acceptance-testing/build

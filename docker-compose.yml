@@ -1,8 +1,8 @@
 version: '2'
 services:
- acceptance:
-  build: .
-  image: qcifengineering/acceptance-testing
-  environment:
-  - SAUCE_ACCESS_KEY
-  - SAUCE_USERNAME
+  acceptance:
+    build: .
+    image: qcifengineering/acceptance-testing
+    environment:
+    - SAUCE_ACCESS_KEY
+    - SAUCE_USERNAME
