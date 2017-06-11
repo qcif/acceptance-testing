@@ -181,6 +181,7 @@ sauceLabs {
         chrome_mac
         chrome_windows
         firefox_windows
+        // android must have latest appiumVersion - see https://github.com/appium/appium/issues/7786
         androidGalaxy {
             capabilities(
                     "platformName": "Android",
@@ -191,6 +192,7 @@ sauceLabs {
                     "appiumVersion": "1.6.4"
             )
         }
+        // allow iphone to pick appium version that works, by leaving out this option
         iPhone {
             capabilities(
                     "platformName": "iOS",
@@ -206,6 +208,7 @@ sauceLabs {
         accessKey = System.getenv('SAUCE_ACCESS_KEY')
     }
     connect {
+        // see https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy+FAQS#SauceConnectProxyFAQS-CanIAccessApplicationsonlocalhost?
         port = 4321
         timeout 20
 //        additionalOptions = ['--proxy', 'proxy.example.com:8080']
