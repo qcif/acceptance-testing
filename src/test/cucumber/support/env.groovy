@@ -14,22 +14,23 @@ def bindingUpdater
 def currentBrowser
 
 Before() { scenario ->
-  currentBrowser = new Browser()
-  bindingUpdater = new BindingUpdater(binding, currentBrowser)
-  bindingUpdater.initialize()
-  if (currentBrowser.driver instanceof RemoteWebDriver) {
-    //needed for test listener(s)
-    println("sessionId:" + ((RemoteWebDriver) currentBrowser.driver).getSessionId())
-  }
+    currentBrowser = new Browser()
+    bindingUpdater = new BindingUpdater(binding, currentBrowser)
+    bindingUpdater.initialize()
+    if (currentBrowser.driver instanceof RemoteWebDriver) {
+        //needed for test listener(s)
+        println("sessionId:" + ((RemoteWebDriver) currentBrowser.driver).getSessionId())
+    }
 }
 
 After() { Scenario scenario ->
-  if (scenario.isFailed()) {
-    final byte[] screenshot = ((TakesScreenshot) currentBrowser.driver).getScreenshotAs(OutputType.BYTES);
-    scenario.embed(screenshot, "image/png");
-    //stick it in the report - go to build/reports/cucumber/index.html to see image(s) in place in html report
-  }
-  // ensure that session starts again - no need for explicit logout
-  bindingUpdater.browser.clearCookies()
-  bindingUpdater.remove()
+    if (scenario.isFailed()) {
+        final byte[] screenshot = ((TakesScreenshot) currentBrowser.driver).getScreenshotAs(OutputType.BYTES);
+        scenario.embed(screenshot, "image/png");
+        //stick it in the report - go to build/reports/cucumber/index.html to see image(s) in place in html report
+    }
+    // ensure that session starts again - no need for explicit logout
+    // - some caps e.g.. Edge will throw exception when cookies cleared, so hide these so test passes
+    bindingUpdater.browser.clearCookiesQuietly()
+    bindingUpdater.remove()
 }
