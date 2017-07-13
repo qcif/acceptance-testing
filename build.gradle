@@ -121,7 +121,7 @@ tasks.withType(Test) {
 
 gradle.taskGraph.whenReady { taskGraph ->
     // putting this simply in sauceLabs as a contained task will bleed it into other non-saucelabs tests, so keep it external
-    if (taskGraph.hasTask(allSauceLabsTests)) {
+    if (taskGraph.hasTask(allSauceLabsTests) || taskGraph.hasTask(sauceLabsCoreDevicesTests)) {
         tasks.withType(Test) {
             // we want to see saucelab results for all tests
             ignoreFailures = true
@@ -263,7 +263,7 @@ task allTests(type: Test) {
     dependsOn drivers.collect { tasks["${it}Test"] }
 }
 
-task sauceLabsCoreDevices(type: Test) {
+task sauceLabsCoreDevicesTests(type: Test) {
     dependsOn(['chromeMac', 'chromeWindows', 'firefoxLinux','firefoxWindows','ie'].collect { "${it}Test" })
 }
 
