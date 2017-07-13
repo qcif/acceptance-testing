@@ -250,18 +250,22 @@ drivers.each { driver ->
 
 task allRemoteTests(type: Test) {
     dependsOn(["remotefirefox", "remotechrome"].collect { "${it}Test" })
+    enabled = false
 }
 
 task allHeadlessTests(type: Test) {
     dependsOn('phantomjsTest', 'allRemoteTests')
+    enabled = false
 }
 
 task allLocalTests(type: Test) {
     dependsOn(['phantomjs', 'firefox', 'chrome'].collect { "${it}Test" })
+    enabled = false
 }
 
 task allTests(type: Test) {
     dependsOn drivers.collect { tasks["${it}Test"] }
+    enabled = false
 }
 
 task sauceLabsCoreDevicesTests(type: Test) {
