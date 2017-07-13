@@ -34,8 +34,7 @@ import org.openqa.selenium.remote.RemoteWebDriver
 */
 
 waiting {
-  timeout = 15
-  retryInterval = 0.5
+  timeout = 7
 }
 
 environments {
@@ -65,9 +64,10 @@ environments {
             //docker remote test drivers
             def remoteWebDriverServerUrl = new URL(System.getenv("DOCKER_HUB_URL"))
             DesiredCapabilities capabilities = new DesiredCapabilities(BrowserType.CHROME, "", Platform.ANY)
-            capabilities.setCapability(ChromeOptions.CAPABILITY, "--no-sandbox")
+            ChromeOptions options = new ChromeOptions()
+            options.addArguments("--no-sandbox")
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options)
             new RemoteWebDriver(remoteWebDriverServerUrl, capabilities)
-//            remote.manage().timeouts().
         }
     }
 

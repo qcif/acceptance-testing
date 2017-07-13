@@ -263,6 +263,10 @@ task allTests(type: Test) {
     dependsOn drivers.collect { tasks["${it}Test"] }
 }
 
+task sauceLabsCoreDevices(type: Test) {
+    dependsOn(['chromeMac', 'chromeWindows', 'firefoxLinux','firefoxWindows','ie'].collect { "${it}Test" })
+}
+
 test {
     dependsOn('saucelabsTest')
     enabled = false

@@ -6,23 +6,34 @@ services:
        - "9000:9000"
   seleniumhub:
     image: selenium/hub:3.4.0
+    ports:
+      - "4444:4444"
   seleniumnodechrome:
     image: selenium/node-chrome:3.4.0
     environment:
-      - HUB_PORT_4444_TCP_ADDR=redbox
+      - HUB_PORT_4444_TCP_ADDR=seleniumhub
       - HUB_PORT_4444_TCP_PORT=4444
     links:
       - seleniumhub:seleniumhub
       - redbox:redbox
+  seleniumnodefirefox:
+      image: selenium/node-firefox:latest
+      environment:
+        - HUB_PORT_4444_TCP_ADDR=seleniumhub
+        - HUB_PORT_4444_TCP_PORT=4444
+      links:
+        - seleniumhub:seleniumhub
+        - redbox:redbox
   acceptance:
     build: .
-    image: qcifengineering/acceptance-testing-dlcf
+    image: qcifengineering/acceptance-testing-redbox
     depends_on:
       - seleniumnodechrome
+      - seleniumnodefirefox
     links:
       - seleniumhub:seleniumhub
       - redbox:redbox
-    command: ['gradle', 'remotechromeTest']
+    command: ['gradle', 'test']
     environment:
       - GEB_BUILD_LOCAL_BASE_URL=http://redbox:9000/redbox/
       - SAUCE_ACCESS_KEY
