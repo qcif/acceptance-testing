@@ -34,7 +34,7 @@ apply plugin: "geb-saucelabs"
 buildscript {
     ext {
         // The drivers we want to use
-        drivers = ["firefox", "chrome", "phantomjs", "remotefirefox", "remotechrome", "saucelabs"]
+        drivers = ["firefox", "chrome", "phantomjs", "remotefirefox", "remotechrome"]
         groovyVersion = '2.4.8'
         gebVersion = '1.1.1'
         seleniumVersion = '3.4.0' //later versions require geckodriver for firefox
@@ -121,27 +121,27 @@ tasks.withType(Test) {
 
 gradle.taskGraph.whenReady { taskGraph ->
     // putting this simply in sauceLabs as a contained task will bleed it into other non-saucelabs tests, so keep it external
-    if (taskGraph.hasTask(/^.*[sS]auce.*Tests$/)) {
-        tasks.withType(Test) {
-            // we want to see saucelab results for all tests
-            ignoreFailures = true
-        }
-        logger.lifecycle("Adding saucelabs listener. Presuming we ARE running saucelab tests...")
-        sauceLabs.task {
-            onOutput { descriptor, TestOutputEvent event ->
-                if (event.message.startsWith("sessionId:")) {
-                    logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
-                    System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
+    gradle.taskGraph.allTasks.each { task ->
+        if (task.name ==~ /^.*[sS]auce.*Test[s]?$/) {
+            tasks.withType(Test) {
+                // we want to see saucelab results for all tests
+                ignoreFailures = true
+            }
+            logger.lifecycle("Adding saucelabs listener to task: ${task.name}")
+            sauceLabs.task {
+                onOutput { descriptor, TestOutputEvent event ->
+                    if (event.message.startsWith("sessionId:")) {
+                        logger.lifecycle("Test: " + descriptor + " saucelabs " + event.message)
+                        System.setProperty("sessionId", event.message.replaceFirst("sessionId:", ""))
+                    }
                 }
+                options {
+                    addTestListener(new SauceTestListener())
+                }
+                testClassesDir = test.testClassesDir
+                classpath = test.classpath
             }
-            options {
-                addTestListener(new SauceTestListener())
-            }
-            testClassesDir = test.testClassesDir
-            classpath = test.classpath
         }
-    } else {
-        logger.lifecycle("No saucelabs listener defined. Presuming we are NOT running saucelab tests..")
     }
     // only check for url if running a test
     if (taskGraph.hasTask(testClasses)) {
@@ -239,9 +239,6 @@ drivers.each { driver ->
             case ~/^remote.*$/:
                 systemProperty "geb.build.baseUrl", System.getenv("GEB_BUILD_DOCKER_BASE_URL") ?: System.getenv("GEB_BUILD_LOCAL_BASE_URL")
                 break
-            case 'saucelabs':
-                dependsOn 'allSauceLabsTests'
-                break
         }
     }
 }
@@ -290,7 +287,9 @@ task sauceIeTests(type: Test) {
 
 
 test {
-    dependsOn('saucelabsTest')
+    dependsOn('allSauceLabsTests')
     enabled = false
 }
-saucelabsTest.enabled = false
+//ensure container tasks themselves are not a test that is run
+//saucelabsTest.enabled = false
+allSauceLabsTests.enabled = false
