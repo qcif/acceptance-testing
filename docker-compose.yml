@@ -2,7 +2,7 @@ version: '2'
 services:
   acceptance:
     build: .
-    image: qcifengineering/acceptance-testing
+    image: qcifengineering/acceptance-testing:parallel
     environment:
     - SAUCE_ACCESS_KEY
     - SAUCE_USERNAME

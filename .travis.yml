@@ -2,24 +2,25 @@ sudo: required
 services:
 - docker
 cache: false
-jobs:
-  include:
-    - stage: install
-      script: docker-compose build && docker-compose run acceptance && docker-compose down
-    - stage: before_script
-      script: cd support/acceptance-testing && docker-compose build
-    - stage: test
-      script: docker-compose run acceptance gradle sauceChromeTests
-    - script: docker-compose run acceptance gradle sauceFirefoxTests
-    - stage: before_deploy
-      script: docker ps -a && docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports /tmp/
-    - stage: deploy
-      provider: pages
-      skip_cleanup: true
-      github_token: $GITHUB_TOKEN
-      local_dir: /tmp/reports
-      on:
-        branch: master
+install:
+- docker-compose build
+- docker-compose run acceptance
+- docker-compose down
+before_script:
+- cd support/acceptance-testing
+- docker-compose build
+script:
+- docker-compose run acceptance gradle sauceChromeTests
+before_deploy:
+- docker ps -a
+- docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports /tmp/
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: /tmp/reports
+  on:
+    branch: master
 notifications:
   webhooks:
     urls:
@@ -28,3 +29,26 @@ notifications:
     on_failure: never
     on_cancel: never
     on_error: never
+
+    jobs:
+      include:
+        - stage: install
+          script: docker-compose build && docker-compose run acceptance && docker-compose down
+        - stage: before_script
+          script: docker-compose build
+        - stage: test
+          script: docker-compose run acceptance gradle chromeMacTest
+        - script: docker-compose run acceptance gradle chromeWindowsTest
+    script:
+    -
+    before_deploy:
+    - docker ps -a
+    - docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports/test-results /tmp/
+    deploy:
+      provider: pages
+      skip_cleanup: true
+      github_token: $GITHUB_TOKEN
+      local_dir: /tmp/test-results
+      repo: qcif/acceptance-acceptance
+      on:
+        branch: master
