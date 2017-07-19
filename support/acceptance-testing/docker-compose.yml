@@ -26,7 +26,7 @@ services:
         - redbox:redbox
   acceptance:
     build: .
-    image: qcifengineering/acceptance-testing-redbox
+    image: qcifengineering/acceptance-testing-redbox:parallel
     depends_on:
       - seleniumnodechrome
       - seleniumnodefirefox
