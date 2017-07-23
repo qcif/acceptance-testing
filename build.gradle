@@ -162,7 +162,7 @@ sauceLabs {
         if (System.getenv('TRAVIS_JOB_NUMBER')) {
             all {
                 capabilities([
-                        "build": System.getenv('TRAVIS_BUILD_NUMBER')
+                        "build": System.getenv('TRAVIS_JOB_NUMBER')
                 ])
             }
         }
