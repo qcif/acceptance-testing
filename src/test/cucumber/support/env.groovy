@@ -42,5 +42,9 @@ After() { Scenario scenario ->
     } catch (Exception e){
         logger.warn("Exception thrown other than WebDriver Exception when clearing cookies", e)
     }
-    bindingUpdater.remove()
+    try {
+        bindingUpdater.remove()
+    } catch (Exception e) {
+        logger.warn("Exception thrown when removing geb bindingupdater", e)
+    }
 }
