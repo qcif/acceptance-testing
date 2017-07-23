@@ -1,17 +1,14 @@
 package au.com.redboxresearchdata.redboxsmoketest.page
-
-import geb.Page
-
 /**
  * @author <a href="matt@redboxresearchdata.com.au">Matt Mulholland</a>
  * Created on 25/05/2017.
  */
-class HomePage extends Page {
-    static URL = ""
-    static at = { $("h2#page-heading")?.text()?.trim() == "Everything" }
+class HomePage extends GenericPage {
+    static url = ""
+    static at = { assertLayoutIsVisible() }
 
     static content = {
-        loginLink(required: false) { $("#user-info .login-now") }
+        loginLink(required: false) { userInfo.$("login-now") }
         loginForm { $("form#login") }
     }
 
@@ -21,4 +18,5 @@ class HomePage extends Page {
             print result
         }
     }
+
 }

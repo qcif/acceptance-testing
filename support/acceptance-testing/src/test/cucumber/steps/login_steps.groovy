@@ -4,11 +4,6 @@ import au.com.redboxresearchdata.redboxsmoketest.page.HomePage
 
 import static cucumber.api.groovy.EN.*
 
-Given(~/^I am on the home page$/) { ->
-    to HomePage
-    at HomePage
-}
-
 When(~/^I click on login$/) { ->
     page.showLoginDialog()
 }

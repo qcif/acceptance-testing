@@ -73,6 +73,7 @@ dependencies {
     //logging
     compile "org.slf4j:slf4j-api:1.7.13"
     compile "org.slf4j:slf4j-simple:1.7.13"
+    compile "info.cukes:cucumber-junit:$cucumberVersion"
     // selenium drivers
     testCompile "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
     testCompile "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
@@ -107,8 +108,12 @@ dependencies {
     testCompile "com.saucelabs.selenium:selenium-client-factory:$sauceSeleniumVersion"
     // this contains the sauce-connect binary for the tunnel so must always be latest - sauceLabs will reject anything but the latest binary
     sauceConnect "com.saucelabs:ci-sauce:1.128"
+    compile "com.vimalselvam:cucumber-extentsreport:3.0.1"
+    compile 'com.aventstack:extentreports:3.0.6'
 }
 tasks.withType(Test) {
+    // can only have 5 concurrent sessions in saucelabs
+    maxParallelForks = 5
     systemProperty "geb.build.baseUrl", System.getenv("GEB_BUILD_LOCAL_BASE_URL")
     reports {
         html.destination = reporting.file("test-results/$name")
@@ -154,7 +159,7 @@ gradle.taskGraph.whenReady { taskGraph ->
 
 sauceLabs {
     browsers {
-        if (System.getenv('TRAVIS_BUILD_NUMBER')) {
+        if (System.getenv('TRAVIS_JOB_NUMBER')) {
             all {
                 capabilities([
                         "build": System.getenv('TRAVIS_BUILD_NUMBER')
