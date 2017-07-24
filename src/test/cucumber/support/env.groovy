@@ -39,12 +39,12 @@ After() { Scenario scenario ->
     // - some caps e.g.. Edge will throw exception when cookies cleared, so hide these so test passes
     try {
         bindingUpdater.browser.clearCookiesQuietly()
-    } catch (Exception e){
-        logger.warn("Exception thrown other than WebDriver Exception when clearing cookies", e)
+    } catch (Throwable e){
+        logger.warn("Exception thrown other than WebDriver Exception when clearing cookies", e.localizedMessage)
     }
     try {
         bindingUpdater.remove()
-    } catch (Exception e) {
-        logger.warn("Exception thrown when removing geb bindingupdater", e)
+    } catch (Throwable e) {
+        logger.warn("Exception thrown when removing geb bindingupdater", e.localizedMessage)
     }
 }
