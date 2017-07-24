@@ -120,7 +120,7 @@ tasks.withType(Test) {
         junitXml.destination = reporting.file("$buildDir/test-results/$name")
     }
     systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
-    //    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=5007"
+//    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=5007"
     outputs.upToDateWhen { false }  // Always run tests
 }
 
@@ -172,6 +172,13 @@ sauceLabs {
                     'platform': 'Windows 10',
                     'version': '14',
                     'browserName': "MicrosoftEdge"
+            )
+        }
+        chrome_Windows10 {
+            capabilities(
+                    'platform': 'Windows 10',
+                    'version': 'latest',
+                    'browserName': 'Chrome'
             )
         }
         ie {

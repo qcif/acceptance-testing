@@ -37,14 +37,7 @@ After() { Scenario scenario ->
     }
     // ensure that session starts again - no need for explicit logout
     // - some caps e.g.. Edge will throw exception when cookies cleared, so hide these so test passes
-    try {
-        bindingUpdater.browser.clearCookiesQuietly()
-    } catch (Throwable e){
-        logger.warn("Exception thrown other than WebDriver Exception when clearing cookies", e.localizedMessage)
-    }
-    try {
-        bindingUpdater.remove()
-    } catch (Throwable e) {
-        logger.warn("Exception thrown when removing geb bindingupdater", e.localizedMessage)
-    }
+
+    bindingUpdater.browser.clearCookiesQuietly()
+    bindingUpdater.remove()
 }
