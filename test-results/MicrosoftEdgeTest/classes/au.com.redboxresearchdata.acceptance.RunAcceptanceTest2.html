@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class au.com.redboxresearchdata.acceptance.RunAcceptanceTest2</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class au.com.redboxresearchdata.acceptance.RunAcceptanceTest2</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/au.com.redboxresearchdata.acceptance.html">au.com.redboxresearchdata.acceptance</a> &gt; RunAcceptanceTest2</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">0</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">-</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">-</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>@login
+Feature: Login
+
+  Scenario: Select the login dialog    ?[90m# login.feature:4?[0m
+    ?[31mGiven ?[0m?[31mI am on the home page?[0m        ?[90m# home_steps.groovy:7?[0m
+      ?[31mgeb.waiting.WaitTimeoutException: condition did not pass in 7.0 seconds (failed with exception)
+      	at geb.waiting.Wait.waitFor(Wait.groovy:138)
+      	at geb.waiting.Wait$waitFor.call(Unknown Source)
+      	at geb.Page.verifyThisPageAtOnly(Page.groovy:243)
+      	at geb.Page.getAtVerificationResult(Page.groovy:223)
+      	at geb.Page.verifyAt(Page.groovy:194)
+      	at geb.Page$verifyAt$4.call(Unknown Source)
+      	at geb.Browser.doAt(Browser.groovy:457)
+      	at geb.Browser.at(Browser.groovy:356)
+      	at geb.Browser$at$5.callCurrent(Unknown Source)
+      	at geb.Browser.to(Browser.groovy:571)
+      	at geb.Browser$to$1.callCurrent(Unknown Source)
+      	at geb.Browser.to(Browser.groovy:548)
+      	at geb.Browser$to$0.callCurrent(Unknown Source)
+      	at geb.Browser.to(Browser.groovy:537)
+      	at geb.Browser.to(Browser.groovy)
+      	at geb.binding.BindingUpdater$InvocationForwarding.doCall(BindingUpdater.groovy:73)
+      	at steps.home_steps$_run_closure1.doCall(home_steps.groovy:8)
+      	at ✽.Given I am on the home page(login.feature:5)
+      Caused by: Assertion failed: 
+      
+      assert selector.$(&quot;h2&quot;)?.text()?.trim() ==~ /OPTIONS/
+             |        |        |       |      |
+             |        |        Options |      false
+             |        |                Options
+             |        [[[[[RemoteWebDriver: MicrosoftEdge on ANY (fbcfca7c15b14ec4860f8af9847ec8c1)] -&gt; css selector: .box.menu]] -&gt; css selector: h2]]
+             [[[RemoteWebDriver: MicrosoftEdge on ANY (fbcfca7c15b14ec4860f8af9847ec8c1)] -&gt; css selector: .box.menu]]
+      
+      	at au.com.redboxresearchdata.redboxsmoketest.page.GenericPage$__clinit__closure2$_closure11.doCall(GenericPage.groovy:39)
+      	at au.com.redboxresearchdata.redboxsmoketest.page.GenericPage$__clinit__closure2$_closure11.doCall(GenericPage.groovy)
+      	at geb.content.PageContentTemplate.invokeFactory(PageContentTemplate.groovy:97)
+      	at geb.content.PageContentTemplate$_create_closure1.doCall(PageContentTemplate.groovy:59)
+      	at geb.content.PageContentTemplate$_create_closure1.doCall(PageContentTemplate.groovy)
+      	at geb.content.PageContentTemplate.create(PageContentTemplate.groovy:82)
+      	at geb.content.PageContentTemplate.get(PageContentTemplate.groovy:54)
+      	at geb.content.DefaultPageContentSupport.getContent(DefaultPageContentSupport.groovy:42)
+      	at geb.content.PageContentSupport.propertyMissing(PageContentSupport.groovy:39)
+      	at geb.content.PageContentSupport$propertyMissing.call(Unknown Source)
+      	at geb.Page.propertyMissing(Page.groovy:112)
+      	at au.com.redboxresearchdata.redboxsmoketest.page.GenericPage.assertLayoutIsVisible(GenericPage.groovy:50)
+      	at au.com.redboxresearchdata.redboxsmoketest.page.HomePage$__clinit__closure1.doCall(HomePage.groovy:8)
+      	at au.com.redboxresearchdata.redboxsmoketest.page.HomePage$__clinit__closure1.doCall(HomePage.groovy)
+      	at geb.waiting.Wait.waitFor(Wait.groovy:127)
+      	at geb.waiting.Wait$waitFor.call(Unknown Source)
+      	at geb.Page.verifyThisPageAtOnly(Page.groovy:243)
+      	at geb.Page.getAtVerificationResult(Page.groovy:223)
+      	at geb.Page.verifyAt(Page.groovy:194)
+      	at geb.Page$verifyAt$4.call(Unknown Source)
+      	at geb.Browser.doAt(Browser.groovy:457)
+      	at geb.Browser.at(Browser.groovy:356)
+      	at geb.Browser$at$5.callCurrent(Unknown Source)
+      	at geb.Browser.to(Browser.groovy:571)
+      	at geb.Browser$to$1.callCurrent(Unknown Source)
+      	at geb.Browser.to(Browser.groovy:548)
+      	at geb.Browser$to$0.callCurrent(Unknown Source)
+      	at geb.Browser.to(Browser.groovy:537)
+      	at geb.Browser.to(Browser.groovy)
+      	at geb.binding.BindingUpdater$InvocationForwarding.doCall(BindingUpdater.groovy:73)
+      	at steps.home_steps$_run_closure1.doCall(home_steps.groovy:8)
+      	at cucumber.runtime.groovy.GroovyBackend.invoke(GroovyBackend.java:155)
+      	at cucumber.runtime.groovy.GroovyStepDefinition$1.call(GroovyStepDefinition.java:67)
+      	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+      	at cucumber.runtime.groovy.GroovyStepDefinition.execute(GroovyStepDefinition.java:64)
+      	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+      	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
+      	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+      	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+      	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+      	at cucumber.runtime.junit.ExecutionUnitRunner.run(ExecutionUnitRunner.java:102)
+      	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:63)
+      	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:18)
+      	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+      	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+      	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+      	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+      	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+      	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+      	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:70)
+      	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:95)
+      	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:38)
+      	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+      	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+      	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+      	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+      	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+      	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+      	at cucumber.api.junit.Cucumber.run(Cucumber.java:100)
+      	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:114)
+      	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:57)
+      	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+      	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+      	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+      	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+      	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+      	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+      	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+      	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+      	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+      	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+      	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:147)
+      	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:129)
+      	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
+      	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+      	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:46)
+      ?[0m
+    ?[36mWhen ?[0m?[36mI click on login?[0m              ?[90m# login_steps.groovy:7?[0m
+    ?[36mThen ?[0m?[36mI should see the login dialog?[0m ?[90m# login_steps.groovy:11?[0m
+
+?[31mFailed scenarios:?[0m
+?[31mlogin.feature:4 ?[0m# Scenario: Select the login dialog
+
+1 Scenarios (?[31m1 failed?[0m)
+3 Steps (?[31m1 failed?[0m, ?[36m2 skipped?[0m)
+0m34.947s
+
+geb.waiting.WaitTimeoutException: condition did not pass in 7.0 seconds (failed with exception)
+	at geb.waiting.Wait.waitFor(Wait.groovy:138)
+	at geb.waiting.Wait$waitFor.call(Unknown Source)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:243)
+	at geb.Page.getAtVerificationResult(Page.groovy:223)
+	at geb.Page.verifyAt(Page.groovy:194)
+	at geb.Page$verifyAt$4.call(Unknown Source)
+	at geb.Browser.doAt(Browser.groovy:457)
+	at geb.Browser.at(Browser.groovy:356)
+	at geb.Browser$at$5.callCurrent(Unknown Source)
+	at geb.Browser.to(Browser.groovy:571)
+	at geb.Browser$to$1.callCurrent(Unknown Source)
+	at geb.Browser.to(Browser.groovy:548)
+	at geb.Browser$to$0.callCurrent(Unknown Source)
+	at geb.Browser.to(Browser.groovy:537)
+	at geb.Browser.to(Browser.groovy)
+	at geb.binding.BindingUpdater$InvocationForwarding.doCall(BindingUpdater.groovy:73)
+	at steps.home_steps$_run_closure1.doCall(home_steps.groovy:8)
+	at ✽.Given I am on the home page(login.feature:5)
+Caused by: Assertion failed: 
+
+assert selector.$(&quot;h2&quot;)?.text()?.trim() ==~ /OPTIONS/
+       |        |        |       |      |
+       |        |        Options |      false
+       |        |                Options
+       |        [[[[[RemoteWebDriver: MicrosoftEdge on ANY (fbcfca7c15b14ec4860f8af9847ec8c1)] -&gt; css selector: .box.menu]] -&gt; css selector: h2]]
+       [[[RemoteWebDriver: MicrosoftEdge on ANY (fbcfca7c15b14ec4860f8af9847ec8c1)] -&gt; css selector: .box.menu]]
+
+	at au.com.redboxresearchdata.redboxsmoketest.page.GenericPage$__clinit__closure2$_closure11.doCall(GenericPage.groovy:39)
+	at au.com.redboxresearchdata.redboxsmoketest.page.GenericPage$__clinit__closure2$_closure11.doCall(GenericPage.groovy)
+	at geb.content.PageContentTemplate.invokeFactory(PageContentTemplate.groovy:97)
+	at geb.content.PageContentTemplate$_create_closure1.doCall(PageContentTemplate.groovy:59)
+	at geb.content.PageContentTemplate$_create_closure1.doCall(PageContentTemplate.groovy)
+	at geb.content.PageContentTemplate.create(PageContentTemplate.groovy:82)
+	at geb.content.PageContentTemplate.get(PageContentTemplate.groovy:54)
+	at geb.content.DefaultPageContentSupport.getContent(DefaultPageContentSupport.groovy:42)
+	at geb.content.PageContentSupport.propertyMissing(PageContentSupport.groovy:39)
+	at geb.content.PageContentSupport$propertyMissing.call(Unknown Source)
+	at geb.Page.propertyMissing(Page.groovy:112)
+	at au.com.redboxresearchdata.redboxsmoketest.page.GenericPage.assertLayoutIsVisible(GenericPage.groovy:50)
+	at au.com.redboxresearchdata.redboxsmoketest.page.HomePage$__clinit__closure1.doCall(HomePage.groovy:8)
+	at au.com.redboxresearchdata.redboxsmoketest.page.HomePage$__clinit__closure1.doCall(HomePage.groovy)
+	at geb.waiting.Wait.waitFor(Wait.groovy:127)
+	at geb.waiting.Wait$waitFor.call(Unknown Source)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:243)
+	at geb.Page.getAtVerificationResult(Page.groovy:223)
+	at geb.Page.verifyAt(Page.groovy:194)
+	at geb.Page$verifyAt$4.call(Unknown Source)
+	at geb.Browser.doAt(Browser.groovy:457)
+	at geb.Browser.at(Browser.groovy:356)
+	at geb.Browser$at$5.callCurrent(Unknown Source)
+	at geb.Browser.to(Browser.groovy:571)
+	at geb.Browser$to$1.callCurrent(Unknown Source)
+	at geb.Browser.to(Browser.groovy:548)
+	at geb.Browser$to$0.callCurrent(Unknown Source)
+	at geb.Browser.to(Browser.groovy:537)
+	at geb.Browser.to(Browser.groovy)
+	at geb.binding.BindingUpdater$InvocationForwarding.doCall(BindingUpdater.groovy:73)
+	at steps.home_steps$_run_closure1.doCall(home_steps.groovy:8)
+	at cucumber.runtime.groovy.GroovyBackend.invoke(GroovyBackend.java:155)
+	at cucumber.runtime.groovy.GroovyStepDefinition$1.call(GroovyStepDefinition.java:67)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.groovy.GroovyStepDefinition.execute(GroovyStepDefinition.java:64)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+	at cucumber.runtime.junit.ExecutionUnitRunner.run(ExecutionUnitRunner.java:102)
+	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:63)
+	at cucumber.runtime.junit.FeatureRunner.runChild(FeatureRunner.java:18)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at cucumber.runtime.junit.FeatureRunner.run(FeatureRunner.java:70)
+	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:95)
+	at cucumber.api.junit.Cucumber.runChild(Cucumber.java:38)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at cucumber.api.junit.Cucumber.run(Cucumber.java:100)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:114)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:147)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:129)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:46)
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.5</a> at Jul 24, 2017 12:49:30 AM</p>
+</div>
+</div>
+</body>
+</html>
