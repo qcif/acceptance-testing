@@ -4,11 +4,6 @@ services:
 cache: false
 jobs:
   include:
-  - stage: build docker image
-    script:
-    - docker-compose build
-    - docker-compose run acceptance
-    - docker-compose push
   - stage: test
     env:
       - TEST_NAME=sauceChromeTests
@@ -16,11 +11,13 @@ jobs:
       - TEST_NAME=sauceIeTests
       - TEST_NAME=sauceMobileTests
     script:
+    - docker-compose build
+    - docker-compose run acceptance
     - cd support/acceptance-testing
-    - docker-compose pull
     - docker-compose run acceptance gradle $TEST_NAME
     - docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports /tmp/
-    - tar -cvzf "${1}.tar.gz" /tmp/reports
+    - tar -cvzf "${TEST_NAME}.tar.gz" /tmp/reports
+    - curl -X "DELETE" "https://api.bintray.com/packages/qcifdev/redboxsmoketest/testreports
     - curl -T "${TEST_NAME}.tar.gz" -uqcifdev:$BINTRAY_API_KEY "https://api.bintray.com/content/qcifdev/redboxsmoketest/testreports/${TEST_NAME}/reports/"
   - stage: deploy
     script: curl -L "https://dl.bintray.com/qcifdev/redboxsmoketest/reports/" -o /tmp/reports
