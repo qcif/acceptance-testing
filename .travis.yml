@@ -6,7 +6,6 @@ jobs:
   include:
   - stage: build docker image
     script:
-    - cd support/acceptance-testing
     - docker-compose build
     - docker-compose run acceptance
     - docker-compose push
