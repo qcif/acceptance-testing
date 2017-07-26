@@ -4,6 +4,7 @@ import cucumber.api.CucumberOptions
 import cucumber.api.junit.Cucumber
 import groovy.transform.AnnotationCollector
 import org.junit.runner.RunWith
+import au.com.redboxresearchdata.acceptance.annotation.transform.CompileDynamicProcessor
 
 /**
  * @author Matt Mulholland (matt@redboxresearchdata.com.au)
