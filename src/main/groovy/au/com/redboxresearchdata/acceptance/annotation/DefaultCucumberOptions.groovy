@@ -1,4 +1,4 @@
-package au.com.redboxresearchdata.annotation
+package au.com.redboxresearchdata.acceptance.annotation
 
 import cucumber.api.CucumberOptions
 import cucumber.api.junit.Cucumber
@@ -13,10 +13,11 @@ import org.junit.runner.RunWith
 @RunWith(Cucumber.class)
 @CucumberOptions(
         format = ["pretty", "html:build/reports/cucumber"],
-        features = ["src/test/cucumber/features"],
-        glue = ["src/test/cucumber/steps", "src/test/cucumber/support"]
+        features = ["src/test/cucumber/au/com/redboxresearchdata/acceptance/features"],
+        glue = ["src/test/cucumber/au/com/redboxresearchdata/acceptance/steps",
+                "src/test/cucumber/au/com/redboxresearchdata/acceptance/support"]
 )
-@AnnotationCollector(processor = "au.com.redboxresearchdata.annotation.transform.CompileDynamicProcessor")
+@AnnotationCollector(processor = "CompileDynamicProcessor")
 @interface DefaultCucumberOptions {
 
 }

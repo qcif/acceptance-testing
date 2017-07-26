@@ -18,7 +18,8 @@
  *
  */
 
-import au.com.redboxresearchdata.listener.SauceTestListener
+
+import au.com.redboxresearchdata.acceptance.listener.SauceTestListener
 import org.apache.tools.ant.taskdefs.condition.Os
 
 group 'au.com.redboxresearchdata'
@@ -294,6 +295,16 @@ task sauceFirefoxTests(type: Test) {
 
 task sauceIeTests(type: Test) {
     dependsOn(['ie'].collect { "${it}Test" })
+    enabled = false
+}
+
+task sauceWindowsTests(type: Test) {
+    dependsOn(['MicrosoftEdge', 'chromeWindows10'].collect { "${it}Test" })
+    enabled = false
+}
+
+task sauceMobileTests(type: Test) {
+    dependsOn(['androidGalaxy', 'iPhone'].collect { "${it}Test" })
     enabled = false
 }
 

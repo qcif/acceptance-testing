@@ -1,4 +1,4 @@
-package au.com.redboxresearchdata.redboxsmoketest.page
+package au.com.redboxresearchdata.acceptance.redboxsmoketest.page
 
 import geb.Page
 import geb.navigator.Navigator

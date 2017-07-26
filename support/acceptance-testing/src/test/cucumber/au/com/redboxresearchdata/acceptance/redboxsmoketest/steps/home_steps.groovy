@@ -1,6 +1,6 @@
-package steps
+package au.com.redboxresearchdata.acceptance.redboxsmoketest.steps
 
-import au.com.redboxresearchdata.redboxsmoketest.page.HomePage
+import au.com.redboxresearchdata.acceptance.redboxsmoketest.page.HomePage
 
 import static cucumber.api.groovy.EN.*
 

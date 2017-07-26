@@ -1,4 +1,4 @@
-package au.com.redboxresearchdata.redboxsmoketest.page
+package au.com.redboxresearchdata.acceptance.redboxsmoketest.page
 /**
  * @author <a href="matt@redboxresearchdata.com.au">Matt Mulholland</a>
  * Created on 25/05/2017.

@@ -1,23 +1,17 @@
-package support
+package au.com.redboxresearchdata.acceptance.support
 
 import cucumber.api.Scenario
-import cucumber.api.groovy.Hooks
 import geb.Browser
 import geb.binding.BindingUpdater
-import groovy.util.logging.Slf4j
 import org.openqa.selenium.OutputType
 import org.openqa.selenium.TakesScreenshot
 import org.openqa.selenium.remote.RemoteWebDriver
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 import static cucumber.api.groovy.Hooks.After
 import static cucumber.api.groovy.Hooks.Before
 
 def bindingUpdater
 def currentBrowser
-
-final Logger logger = LoggerFactory.getLogger(Hooks.class)
 
 Before() { scenario ->
     currentBrowser = new Browser()
@@ -37,7 +31,6 @@ After() { Scenario scenario ->
     }
     // ensure that session starts again - no need for explicit logout
     // - some caps e.g.. Edge will throw exception when cookies cleared, so hide these so test passes
-
     bindingUpdater.browser.clearCookiesQuietly()
     bindingUpdater.remove()
 }

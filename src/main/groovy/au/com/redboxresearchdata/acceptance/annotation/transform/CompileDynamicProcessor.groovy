@@ -1,11 +1,9 @@
-package au.com.redboxresearchdata.annotation.transform
+package au.com.redboxresearchdata.acceptance.annotation.transform
 
-import groovy.util.logging.Slf4j
 import org.codehaus.groovy.ast.AnnotatedNode
 import org.codehaus.groovy.ast.AnnotationNode
 import org.codehaus.groovy.ast.expr.ConstantExpression
 import org.codehaus.groovy.ast.expr.Expression
-import org.codehaus.groovy.ast.expr.ListExpression
 import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.AnnotationCollectorTransform
 
