@@ -2,11 +2,6 @@ sudo: required
 services:
   - docker
 cache: false
-env:
-  - TEST_NAME=sauceChromeTests
-  - TEST_NAME=sauceFirefoxTests
-  - TEST_NAME=sauceIeTests
-  - TEST_NAME=sauceMobileTests
 jobs:
   include:
   - stage: build docker image
@@ -16,6 +11,11 @@ jobs:
     - docker-compose run acceptance
     - docker-compose push
   - stage: test
+    env:
+      - TEST_NAME=sauceChromeTests
+      - TEST_NAME=sauceFirefoxTests
+      - TEST_NAME=sauceIeTests
+      - TEST_NAME=sauceMobileTests
     script:
     - cd support/acceptance-testing
     - docker-compose pull
