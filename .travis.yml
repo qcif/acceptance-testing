@@ -2,12 +2,6 @@ sudo: required
 services:
 - docker
 cache: false
-env:
-  - TEST_NAME=sauceChromeTests
-  - TEST_NAME=sauceFirefoxTests
-  - TEST_NAME=sauceIeTests
-  - TEST_NAME=sauceMobileTests
-
 jobs:
   include:
   - stage: install
@@ -20,6 +14,11 @@ jobs:
       github_token: $GITHUB_TOKEN
       local_dir: /tmp/reports
 
+env:
+  - TEST_NAME=sauceChromeTests
+  - TEST_NAME=sauceFirefoxTests
+  - TEST_NAME=sauceIeTests
+  - TEST_NAME=sauceMobileTests
 before_script:
 - cd support/acceptance-testing && docker-compose pull
 script:
