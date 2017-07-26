@@ -12,7 +12,7 @@ jobs:
   - stage: install
     script: cd support/acceptance-testing && docker-compose build && docker-compose run acceptance && docker-compose push
   - stage: test
-    script: chmod +x ./support/travis/script.sh && ./support/travis/script.sh
+    script: ./support/travis/script.sh && curl -T "${TEST_NAME}.tar.gz" -uqcifdev:$BINTRAY_API_KEY "https://api.bintray.com/content/qcifdev/redboxsmoketest/testreports/${TEST_NAME}/reports/"
   - stage: deploy
     script: curl -L "https://dl.bintray.com/qcifdev/redboxsmoketest/reports" -o /tmp/reports
     deploy:
