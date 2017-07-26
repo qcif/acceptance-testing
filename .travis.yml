@@ -20,8 +20,8 @@ script:
 before_deploy:
 - docker ps -a
 - docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports /tmp/
-- tar -cvzf ${TEST_NAME}.tar.gz /tmp/reports
-- curl -T "${TEST_NAME}.tar.gz" -uqcifdev:$BINTRAY-API-KEY https://api.bintray.com/content/qcifdev/redboxsmoketest/testreports/${TEST_NAME}/reports/
+- tar -cvzf "${TEST_NAME}.tar.gz" /tmp/reports
+- curl -T "${TEST_NAME}.tar.gz" -uqcifdev:$BINTRAY_API_KEY "https://api.bintray.com/content/qcifdev/redboxsmoketest/testreports/${TEST_NAME}/reports/"
 
 jobs:
   include:
