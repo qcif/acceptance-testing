@@ -2,27 +2,27 @@ sudo: required
 services:
   - docker
 cache: false
+env:
+  - TEST_NAME=sauceChromeTests
+  - TEST_NAME=sauceFirefoxTests
+  - TEST_NAME=sauceIeTests
+  - TEST_NAME=sauceMobileTests
+script:
+- docker-compose build
+- docker-compose run acceptance
+- cd support/acceptance-testing
+- docker-compose run acceptance gradle $TEST_NAME
+- docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports /tmp/
+- tar -cvzf "${TEST_NAME}.tar.gz" /tmp/reports
+- curl -X "DELETE" "https://api.bintray.com/packages/qcifdev/redboxsmoketest/testreports
+- curl -T "${TEST_NAME}.tar.gz" -uqcifdev:$BINTRAY_API_KEY "https://api.bintray.com/content/qcifdev/redboxsmoketest/testreports/${TEST_NAME}/reports/"
+
 jobs:
   include:
-  - stage: test
-    env:
-      - TEST_NAME=sauceChromeTests
-      - TEST_NAME=sauceFirefoxTests
-      - TEST_NAME=sauceIeTests
-      - TEST_NAME=sauceMobileTests
-    script:
-    - docker-compose build
-    - docker-compose run acceptance
-    - cd support/acceptance-testing
-    - docker-compose run acceptance gradle $TEST_NAME
-    - docker cp `docker ps -aqf "name=_acceptance_"`:/home/groovy/acceptance/build/reports /tmp/
-    - tar -cvzf "${TEST_NAME}.tar.gz" /tmp/reports
-    - curl -X "DELETE" "https://api.bintray.com/packages/qcifdev/redboxsmoketest/testreports
-    - curl -T "${TEST_NAME}.tar.gz" -uqcifdev:$BINTRAY_API_KEY "https://api.bintray.com/content/qcifdev/redboxsmoketest/testreports/${TEST_NAME}/reports/"
   - stage: deploy
-    script: curl -L "https://dl.bintray.com/qcifdev/redboxsmoketest/reports/" -o /tmp/reports
-    deploy:
-      provider: pages
-      skip_cleanup: true
-      github_token: $GITHUB_TOKEN
-      local_dir: /tmp/reports
+  script: curl -L "https://dl.bintray.com/qcifdev/redboxsmoketest/reports/" -o /tmp/reports
+  deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: /tmp/reports
