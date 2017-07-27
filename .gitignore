@@ -25,4 +25,4 @@ gradle-app.setting
 .vagrant/
 gradle/build/
 support/acceptance-testing/build
-temp/
+#temp/

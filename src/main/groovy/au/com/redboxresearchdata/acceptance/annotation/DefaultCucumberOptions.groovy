@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
         format = ["pretty", "html:build/reports/cucumber"],
         features = ["src/test/cucumber/au/com/redboxresearchdata/acceptance/**/features"],
         glue = ["src/test/cucumber/au/com/redboxresearchdata/acceptance/**/steps",
-                "src/test/cucumber/au/com/redboxresearchdata/acceptance/**/support"]
+                "src/test/cucumber/au/com/redboxresearchdata/acceptance/support"]
 )
 @AnnotationCollector(processor = "au.com.redboxresearchdata.acceptance.annotation.transform.CompileDynamicProcessor")
 @interface DefaultCucumberOptions {
