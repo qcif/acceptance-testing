@@ -4,7 +4,6 @@ import cucumber.api.CucumberOptions
 import cucumber.api.junit.Cucumber
 import groovy.transform.AnnotationCollector
 import org.junit.runner.RunWith
-import au.com.redboxresearchdata.acceptance.annotation.transform.CompileDynamicProcessor
 
 /**
  * @author Matt Mulholland (matt@redboxresearchdata.com.au)
@@ -18,7 +17,7 @@ import au.com.redboxresearchdata.acceptance.annotation.transform.CompileDynamicP
         glue = ["src/test/cucumber/au/com/redboxresearchdata/acceptance/steps",
                 "src/test/cucumber/au/com/redboxresearchdata/acceptance/support"]
 )
-@AnnotationCollector(processor = "CompileDynamicProcessor")
+@AnnotationCollector(processor = "au.com.redboxresearchdata.acceptance.annotation.transform.CompileDynamicProcessor")
 @interface DefaultCucumberOptions {
 
 }
