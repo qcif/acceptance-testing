@@ -20,6 +20,7 @@
 
 
 import au.com.redboxresearchdata.acceptance.listener.SauceTestListener
+import geb.gradle.cloud.BrowserSpec
 import org.apache.tools.ant.taskdefs.condition.Os
 
 group 'au.com.redboxresearchdata'
@@ -161,10 +162,12 @@ gradle.taskGraph.whenReady { taskGraph ->
 sauceLabs {
     browsers {
         if (System.getenv('TRAVIS_BUILD_NUMBER')) {
-            all { browserSpec ->
+            all { BrowserSpec browserSpec ->
+                def buildId =
                 capabilities([
                         "build": System.getenv('TRAVIS_BUILD_NUMBER') + browserSpec.displayName ?: ""
                 ])
+                logger.lifecycle("browser capabilities: " + browserSpec.capabilities)
             }
         }
         firefox_linux
