@@ -20,7 +20,6 @@
 
 
 import au.com.redboxresearchdata.acceptance.listener.SauceTestListener
-import geb.gradle.cloud.BrowserSpec
 import org.apache.tools.ant.taskdefs.condition.Os
 
 group 'au.com.redboxresearchdata'
@@ -122,7 +121,7 @@ tasks.withType(Test) {
         junitXml.destination = reporting.file("$buildDir/test-results/$name")
     }
     systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
-    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=5007"
+//    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=5007"
     outputs.upToDateWhen { false }  // Always run tests
 }
 
@@ -162,8 +161,7 @@ gradle.taskGraph.whenReady { taskGraph ->
 sauceLabs {
     browsers {
         if (System.getenv('TRAVIS_BUILD_NUMBER')) {
-            all { BrowserSpec browserSpec ->
-                def buildId =
+            all { browserSpec ->
                 capabilities([
                         "build": System.getenv('TRAVIS_BUILD_NUMBER') + browserSpec.displayName ?: ""
                 ])
